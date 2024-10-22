@@ -1,0 +1,63 @@
+/*PRACTICAL – 5 – “Like” Queries
+(1) Display all customers whose name start with ‘M’.
+(2) Display all the customers whose name ends with ‘L’.
+(3) Display all loan details whose branch starts with ‘A’.
+(4) Display the details of sailors whose name is minimum 6 characters long.
+(5) Display the details of Employees whose address starts with ‘S’.
+(6) List the details of the boat ending with ‘e’.
+(7) List the details of clients having ‘h’ as a 3rd character in his/her name.
+(8) List Client Name, due balance and city whose pin code starts with 4.
+(9) List all customers whose city contains ‘a’ as second character.
+(10) List client names and city whose state has ‘a’ as fourth or fifth character.
+
+
+
+Here are some examples showing different LIKE operators with '%' and '_' wildcards:
+LIKE Operator	Description
+WHERE CustomerName LIKE 'a%'	Finds any values that start with "a"
+WHERE CustomerName LIKE '%a'	Finds any values that end with "a"
+WHERE CustomerName LIKE '%or%'	Finds any values that have "or" in any position
+WHERE CustomerName LIKE '_r%'	Finds any values that have "r" in the second position
+WHERE CustomerName LIKE 'a_%'	Finds any values that start with "a" and are at least 2 characters in length
+WHERE CustomerName LIKE 'a__%'	Finds any values that start with "a" and are at least 3 characters in length
+WHERE ContactName LIKE 'a%o'	Finds any values that start with "a" and ends with "o"
+*/
+
+SELECT cname FROM customers WHERE cname LIKE 'M%';
+SELECT cname FROM customers WHERE cname LIKE '%L';
+select *from Branch,Borrow where Branch.Bname like "A%" and Branch.Bname=Borrow.Bname;
+select *from sailors where Sailors.sname like "______%";
+select *from employee where Street like "s%" or city like "s%";
+select *from boats where Bname like "%e";
+select *from boats;
+select *from client where Name like "__h%";
+select name,baldue,city,Pincode from client where Pincode like "4%";
+SELECT cname,city FROM customers WHERE city LIKE '_a%';
+select name,city,state from client where state like "___a%" or state like "____a%";
+
+/*PRACTICAL – 6 – “Aggregate Functions & DML” Queries
+(1) List total deposit from deposit.
+select sum(Amount) as totalsum from deposit;
+select sum(Amount) from deposit;
+(2) Give maximum loan given to the customer.
+select max(Amount) as maxloan from Borrow; 
+(3) Describe the average age of all the sailors.
+select avg(age) as average_age from sailors;
+(4) Count total number of customers
+select count(Cname) as total_Customers from Customers;
+(5) Count total number of customer’s cities.
+select count(City) as total_City from Customers;
+(6) Display total target for the salesman.
+select sum(tgt) from Salesman;
+(6) Update the salary of the employee having 10000 to 11500 .
+(7) Update the city of client from Bangalore to Bengaluru.
+update client set city ="Bengaluru" where city="Bangalore";
+(8) Give the 15% hike in the salary of all the Employees. Rename that column to “New Salary”.
+select *from work;
+alter table work add column new_salary decimal(20);
+update work set new_salary=salary * 1.15;
+(9) Increase the sell price of all products by 20% and label new column as “New Sell Price”. (Do not update the table)
+select *from product;
+ select Sell_price, Sell_price * 1.20 as new_sell_price from product;
+(10) Provide the count of customers staying in “Bombay”.*/
+select count(cname) from Customers where City="Bombay";
